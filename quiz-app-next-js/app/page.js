@@ -1,65 +1,107 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useAuth } from "./lib/AuthContext";
+import { Button, Card } from "flowbite-react";
 
 export default function Home() {
+  const { user, loading } = useAuth();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Witaj w Quiz App
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Twórz, edytuj i rozwiązuj quizy z różnymi typami pytań
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {loading ? (
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
+          </div>
+        ) : user ? (
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                Utwórz nowy quiz
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Stwórz własny quiz z różnymi typami pytań: pojedynczy wybór,
+                wielokrotny wybór, uzupełnianie i dopasowanie par.
+              </p>
+              <Link href="/quiz/create">
+                <Button color="blue" className="w-full">
+                  Utwórz Quiz
+                </Button>
+              </Link>
+            </Card>
+
+            <Card>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                Moje quizy
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Zarządzaj swoimi quizami - edytuj, usuń lub zobacz statystyki.
+              </p>
+              <Link href="/quiz/my-quizzes">
+                <Button color="light" className="w-full">
+                  Zobacz Moje Quizy
+                </Button>
+              </Link>
+            </Card>
+
+            <Card>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                Przeglądaj quizy
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Znajdź i rozwiązuj quizy stworzone przez innych użytkowników.
+              </p>
+              <Link href="/quiz/browse">
+                <Button color="light" className="w-full">
+                  Przeglądaj
+                </Button>
+              </Link>
+            </Card>
+
+            <Card>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                Typy pytań
+              </h3>
+              <ul className="text-gray-600 dark:text-gray-400 space-y-2 mb-4">
+                <li>• Pojedynczy wybór</li>
+                <li>• Wielokrotny wybór</li>
+                <li>• Uzupełnianie pól</li>
+                <li>• Dopasowanie par</li>
+              </ul>
+            </Card>
+          </div>
+        ) : (
+          <div className="text-center">
+            <Card className="max-w-md mx-auto">
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                Zaloguj się, aby rozpocząć
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                Zaloguj się lub zarejestruj, aby móc tworzyć i rozwiązywać
+                quizy.
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Link href="/public/user/signin">
+                  <Button color="blue">Zaloguj się</Button>
+                </Link>
+                <Link href="/public/user/register">
+                  <Button color="light">Rejestracja</Button>
+                </Link>
+              </div>
+            </Card>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

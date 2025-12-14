@@ -10,15 +10,19 @@
   },
   "dependencies": {
     "firebase": "^12.6.0",
-    "next": "16.0.6",
+    "flowbite-react": "^0.12.10",
+    "next": "^16.0.7",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-firebase-hooks": "^5.1.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4",
+    "@types/node": "^24.10.1",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.0.6",
+    "eslint-config-next": "^16.0.7",
     "tailwindcss": "^4"
   }
 }
