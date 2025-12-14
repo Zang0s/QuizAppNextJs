@@ -173,7 +173,7 @@ export default function ProfileForm() {
                   onChange={(e) =>
                     setFormData({ ...formData, displayName: e.target.value })
                   }
-                  className="pl-10"
+                  className="pl-10 py-3 px-3"
                   placeholder="Twoja nazwa"
                 />
               </div>
@@ -191,7 +191,7 @@ export default function ProfileForm() {
                   type="email"
                   value={formData.email}
                   disabled
-                  className="pl-10 bg-gray-100 dark:bg-gray-700"
+                  className="pl-10 py-3 px-3 bg-gray-100 dark:bg-gray-700"
                 />
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function ProfileForm() {
                   onChange={(e) =>
                     setFormData({ ...formData, photoURL: e.target.value })
                   }
-                  className="pl-10"
+                  className="pl-10 py-3 px-3"
                   placeholder="https://example.com/photo.jpg"
                 />
               </div>
@@ -238,7 +238,7 @@ export default function ProfileForm() {
                     onChange={(e) =>
                       setFormData({ ...formData, street: e.target.value })
                     }
-                    className="pl-10"
+                    className="pl-10 py-3 px-3"
                     placeholder="Nazwa ulicy"
                     disabled={loadingAddress}
                   />
@@ -259,7 +259,7 @@ export default function ProfileForm() {
                     onChange={(e) =>
                       setFormData({ ...formData, city: e.target.value })
                     }
-                    className="pl-10"
+                    className="pl-10 py-3 px-3"
                     placeholder="Nazwa miasta"
                     disabled={loadingAddress}
                   />
@@ -280,7 +280,7 @@ export default function ProfileForm() {
                     onChange={(e) =>
                       setFormData({ ...formData, zipCode: e.target.value })
                     }
-                    className="pl-10"
+                    className="pl-10 py-3 px-3"
                     placeholder="00-000"
                     disabled={loadingAddress}
                   />

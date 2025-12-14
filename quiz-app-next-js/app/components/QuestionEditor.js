@@ -130,6 +130,7 @@ export default function QuestionEditor({
             value={localQuestion.title || ""}
             onChange={(e) => updateField("title", e.target.value)}
             placeholder="Np. Pytanie 1"
+            className="py-3 px-3"
           />
         </div>
 
@@ -169,7 +170,7 @@ export default function QuestionEditor({
                             updateOption(optIdx, "text", e.target.value)
                           }
                           placeholder={`Opcja ${optIdx + 1}`}
-                          className="flex-1"
+                          className="flex-1 py-3 px-3"
                         />
                       ) : (
                         <TextInput
@@ -178,7 +179,7 @@ export default function QuestionEditor({
                             updateOption(optIdx, "imageUrl", e.target.value)
                           }
                           placeholder="URL obrazu"
-                          className="flex-1"
+                          className="flex-1 py-3 px-3"
                         />
                       )}
                     </div>
@@ -422,7 +423,7 @@ export default function QuestionEditor({
                           updateMatchingPair("left", idx, e.target.value)
                         }
                         placeholder={`Element ${idx + 1}`}
-                        className="flex-1"
+                        className="flex-1 py-3"
                       />
                       <Button
                         color="failure"
@@ -456,7 +457,7 @@ export default function QuestionEditor({
                           updateMatchingPair("right", idx, e.target.value)
                         }
                         placeholder={`Opcja ${idx + 1}`}
-                        className="flex-1"
+                        className="flex-1 py-3"
                       />
                       <Button
                         color="failure"

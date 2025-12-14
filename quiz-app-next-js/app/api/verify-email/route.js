@@ -10,12 +10,12 @@ try {
 
 if (admin && !admin.apps.length) {
   try {
-    const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT;
+    const serviceAccount = process.env.SERVICE_ACCOUNT_KEY;
     const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
     if (!serviceAccount) {
       console.error(
-        "FIREBASE_SERVICE_ACCOUNT nie jest ustawiony. Aby zweryfikować email programowo, musisz skonfigurować Firebase Admin SDK."
+        "SERVICE_ACCOUNT_KEY nie jest ustawiony. Aby zweryfikować email programowo, musisz skonfigurować Firebase Admin SDK."
       );
     } else {
       try {
@@ -30,7 +30,7 @@ if (admin && !admin.apps.length) {
             serviceAccountJson = JSON.parse(decoded);
           } catch (base64Error) {
             throw new Error(
-              "Nie można sparsować FIREBASE_SERVICE_ACCOUNT. Upewnij się, że JSON jest poprawnie sformatowany lub użyj base64 encoding."
+              "Nie można sparsować SERVICE_ACCOUNT_KEY. Upewnij się, że JSON jest poprawnie sformatowany lub użyj base64 encoding."
             );
           }
         }
@@ -78,7 +78,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           error:
-            "Firebase Admin nie jest skonfigurowany. Dodaj FIREBASE_SERVICE_ACCOUNT do zmiennych środowiskowych. Aby uzyskać klucz serwisowy: Firebase Console → Settings → Service accounts → Generate new private key",
+            "Firebase Admin nie jest skonfigurowany. Dodaj SERVICE_ACCOUNT_KEY do zmiennych środowiskowych. Aby uzyskać klucz serwisowy: Firebase Console → Settings → Service accounts → Generate new private key",
         },
         { status: 500 }
       );

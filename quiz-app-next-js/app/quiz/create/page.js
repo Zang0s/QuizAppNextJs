@@ -159,6 +159,7 @@ export default function CreateQuiz() {
                 onChange={(e) => setQuizTitle(e.target.value)}
                 placeholder="Np. Quiz z matematyki"
                 required
+                className="py-3 px-3"
               />
             </div>
             <div>

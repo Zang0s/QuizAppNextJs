@@ -67,7 +67,7 @@ export default function BrowseQuizzes() {
             placeholder="Szukaj quizów..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="max-w-md"
+            className="max-w-md py-3 px-3"
           />
         </div>
 
