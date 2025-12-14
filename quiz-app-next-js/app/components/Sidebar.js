@@ -13,12 +13,13 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { user } = useAuth();
 
   const menuItems = [
     { href: "/", label: "Strona główna", icon: FaHome },
+    { href: "/about", label: "O aplikacji", icon: FaUser },
     ...(user
       ? [
           { href: "/quiz/create", label: "Utwórz Quiz", icon: FaPlusCircle },
@@ -34,8 +35,19 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-white dark:bg-gray-800 shadow-lg">
-      <div className="h-full flex flex-col">
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      <aside
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="h-full flex flex-col">
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
             Quiz App
@@ -78,6 +90,7 @@ export default function Sidebar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={onClose}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                       isActive
                         ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300"
@@ -92,8 +105,9 @@ export default function Sidebar() {
             })}
           </ul>
         </nav>
-      </div>
-    </aside>
+        </div>
+      </aside>
+    </>
   );
 }
 

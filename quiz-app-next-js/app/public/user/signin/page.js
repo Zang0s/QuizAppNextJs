@@ -31,8 +31,14 @@ function SignInFormContent() {
       .then(() => {
         signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-            const redirectPath = returnUrl || "/";
-            router.push(redirectPath);
+            const user = userCredential.user;
+            if (!user.emailVerified) {
+              router.push("/public/user/verify");
+              setLoading(false);
+            } else {
+              const redirectPath = returnUrl || "/";
+              router.push(redirectPath);
+            }
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -47,6 +53,10 @@ function SignInFormContent() {
                 break;
               case "auth/wrong-password":
                 userFriendlyMessage = "Nieprawidłowe hasło.";
+                break;
+              case "auth/invalid-credential":
+                userFriendlyMessage =
+                  "Nieprawidłowy adres email lub hasło. Sprawdź wprowadzone dane.";
                 break;
               case "auth/invalid-email":
                 userFriendlyMessage = "Nieprawidłowy adres email.";

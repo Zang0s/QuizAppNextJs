@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { useAuth } from "@/app/lib/AuthContext";
 import { useRouter } from "next/navigation";
 import { Button, Card, TextInput, Label, Alert } from "flowbite-react";
@@ -44,8 +48,12 @@ export default function RegisterForm() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("User registered!");
-        router.push("/");
-        setLoading(false);
+        const user = userCredential.user;
+        return sendEmailVerification(user).then(() => {
+          console.log("Email verification sent!");
+          router.push("/public/user/verify");
+          setLoading(false);
+        });
       })
       .catch((error) => {
         setRegisterError(error.message);

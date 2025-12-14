@@ -5,10 +5,16 @@ import { useAuth } from "../lib/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { Button } from "flowbite-react";
-import { FaSignInAlt, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaSignInAlt,
+  FaUserPlus,
+  FaSignOutAlt,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import Image from "next/image";
 
-export default function TopBar() {
+export default function TopBar({ onMenuToggle, isMenuOpen }) {
   const { user, loading } = useAuth();
 
   const handleSignOut = async () => {
@@ -21,9 +27,20 @@ export default function TopBar() {
 
   return (
     <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
-      <div className="px-6 py-4 flex justify-between items-center">
-        <div className="flex-1"></div>
-        <div className="flex items-center gap-3">
+      <div className="px-4 sm:px-6 py-4 flex justify-between items-center">
+        <button
+          onClick={onMenuToggle}
+          className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <FaTimes className="w-6 h-6" />
+          ) : (
+            <FaBars className="w-6 h-6" />
+          )}
+        </button>
+        <div className="flex-1 hidden lg:block"></div>
+        <div className="flex items-center gap-2 sm:gap-3">
           {loading ? (
             <div className="w-20 h-8 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"></div>
           ) : user ? (
@@ -45,7 +62,7 @@ export default function TopBar() {
                       : user.email?.charAt(0).toUpperCase() || "U"}
                   </div>
                 )}
-                <span className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="hidden sm:inline text-sm text-gray-700 dark:text-gray-300">
                   {user.displayName || user.email}
                 </span>
               </div>
@@ -82,4 +99,3 @@ export default function TopBar() {
     </header>
   );
 }
-

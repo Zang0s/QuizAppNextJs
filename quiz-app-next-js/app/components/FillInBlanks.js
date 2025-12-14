@@ -182,17 +182,6 @@ export default function FillInBlanks({
         )}
       </div>
 
-      {!isReadOnly && (
-        <Button
-          onClick={handleSubmit}
-          disabled={answers.some(
-            (answer) => answer === "" || answer === undefined
-          )}
-          className="w-full sm:w-auto"
-        >
-          Zatwierdź odpowiedź
-        </Button>
-      )}
 
       {isReadOnly && userAnswer && (
         <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
